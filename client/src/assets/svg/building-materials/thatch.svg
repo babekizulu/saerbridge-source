@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+<title id="title">Thatch</title>
+<g fill="none" stroke="#355B44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+
+<path d="M21 72 64 30l43 42" fill="#F0DFC4"/>
+<path d="M29 71 64 38l35 33M35 75l7-9m8 9 6-16m8 16V47m9 28-6-16m18 16-7-9"/>
+
+</g>
+</svg>

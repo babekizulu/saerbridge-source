@@ -1,0 +1,84 @@
+@use './utils' as *;
+
+.draggable {
+    @include flex-column-center;
+    position: relative;
+    flex: 0 0 104px;
+    width: 104px;
+    min-height: 112px;
+    height: auto;
+    padding: 8px;
+    font: inherit;
+    border: none;
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(19, 19, 19, 0.08);
+    border-radius: 22px;
+    background: $light;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.08);
+    color: $navy;
+    cursor: grab;
+    user-select: none;
+
+    svg,
+    img {
+        width: 36px;
+        height: 36px;
+        flex: 0 0 auto;
+        color: $green;
+        object-fit: contain;
+    }
+
+    span {
+        max-width: 100%;
+        font-family: $ibm;
+        font-size: 0.72rem;
+        font-weight: 500;
+        line-height: 1.15;
+        text-align: center;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.draggable.is-shaking {
+    animation: tile-shake 0.36s ease;
+}
+
+@keyframes tile-shake {
+    0%,
+    100% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+}
+
+.draggable.is-placed {
+    cursor: default;
+}
+
+.draggable-remove {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: $navy;
+    color: $light;
+    font-size: 1rem;
+    line-height: 28px;
+    cursor: pointer;
+
+    &:hover {
+        background: $navy-active;
+    }
+}

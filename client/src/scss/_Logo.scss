@@ -1,0 +1,30 @@
+@use './utils' as *;
+
+.logo {
+    @include flex-center;
+    font-size: 1.5rem;
+    text-decoration: none;
+
+    img {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+.logo-divider {
+    text-decoration: none;
+    color: $navy;
+}
+
+.logo-blue {
+    text-decoration: none;
+    color: $dark;
+    font-weight: 600;
+}
+
+.logo-grey {
+    text-decoration: none;
+    color: $light-active;
+    font-family: $sourceserif;
+    font-style: italic;
+}

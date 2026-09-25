@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+<title id="title">Bathtub</title>
+<g fill="none" stroke="#355B44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+<path d="M25 57h78v14c0 18-14 29-32 29H57c-18 0-32-11-32-29Z" fill="#E7F0E2"/><path d="M31 100v5M97 100v5M83 57V40h14"/>
+</g>
+</svg>

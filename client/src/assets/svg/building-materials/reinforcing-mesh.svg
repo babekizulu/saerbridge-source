@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+<title id="title">Reinforcing mesh</title>
+<g fill="none" stroke="#355B44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+<rect x="27" y="27" width="74" height="74"/><path d="M42 27v74M27 42h74"/><path d="M57 27v74M27 57h74"/><path d="M72 27v74M27 72h74"/><path d="M87 27v74M27 87h74"/>
+</g>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+<title id="title">Rigid insulation</title>
+<g fill="none" stroke="#355B44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+
+<path d="M23 78c0-20 16-36 36-36h39v36H59c-10 0-18 8-18 18" fill="#E7F0E2"/>
+<circle cx="59" cy="78" r="18" fill="#FFFFFF"/>
+<circle cx="59" cy="78" r="7" fill="#AFC8A7"/>
+
+</g>
+</svg>

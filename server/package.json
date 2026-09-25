@@ -1,0 +1,29 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --use-system-ca --watch index.js",
+    "start": "node --use-system-ca index.js",
+    "test": "node --test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.3",
+    "exceljs": "^4.4.0",
+    "express": "^5.2.1",
+    "multer": "^2.4.0",
+    "openai": "^7.21.0",
+    "pdf-lib": "^1.17.1",
+    "sharp": "^0.35.4",
+    "zod": "^4.6.5"
+  },
+  "engines": {
+    "node": ">=22.15.0"
+  }
+}

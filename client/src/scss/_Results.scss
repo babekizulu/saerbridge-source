@@ -1,0 +1,400 @@
+@use './utils' as *;
+
+.site-photo,
+.location-field,
+.result-dashboard,
+.generate-hint {
+    width: min(700px, 100%);
+    margin: 0 auto 1.25rem;
+}
+
+.site-photo h2,
+.location-field h2,
+.design-result h2,
+.result-dashboard h3,
+.result-dashboard h4 {
+    margin: 0 0 0.45rem;
+    color: $navy;
+    font-family: $isans;
+    font-size: 1.15rem;
+    font-weight: 500;
+}
+
+.site-photo-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.55rem;
+    min-height: 180px;
+    padding: 1.1rem;
+    border: none;
+    box-shadow: 0 8px 20px rgba(19, 19, 19, 0.08);
+    background: #fff;
+    border-radius: 16px;
+    background: #fff;
+    color: $navy;
+
+    svg {
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+
+    p {
+        margin: 0;
+        font-family: $isans;
+    }
+
+    img {
+        width: 100%;
+        max-height: 360px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+}
+
+.site-photo-secondary,
+.location-field > p,
+.generate-hint,
+.location-note,
+.location-status,
+.site-photo-consent p,
+.site-photo-error {
+    color: $dark-active;
+    font-size: 0.95rem;
+    line-height: 1.45;
+}
+
+.site-photo-actions,
+.location-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.site-photo-consent {
+    margin-top: 0.8rem;
+
+    label {
+        display: flex;
+        gap: 0.65rem;
+        align-items: flex-start;
+        color: $navy;
+        font-family: $isans;
+        line-height: 1.4;
+    }
+
+    input {
+        width: 1.15rem;
+        height: 1.15rem;
+        margin-top: 0.15rem;
+        accent-color: $navy;
+    }
+}
+
+.site-photo-warning {
+    color: $olive;
+}
+
+.location-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    margin-top: 0.6rem;
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        color: $navy;
+        font-family: $isans;
+        font-size: 0.8rem;
+    }
+
+    input {
+        min-height: 44px;
+        padding: 0.4rem 0.7rem;
+        border: 1px solid $green;
+        border-radius: 10px;
+        background: $light;
+        color: $dark;
+        font-family: $isans;
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 700px) {
+    .location-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.result-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    margin-top: 1.4rem;
+
+    section,
+    > a,
+    > p {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    p,
+    li {
+        color: $dark;
+        font-family: $isans;
+        line-height: 1.45;
+    }
+
+    ul,
+    ol {
+        margin: 0.4rem 0 0;
+        padding-left: 1.2rem;
+    }
+}
+
+.space-tally {
+    dl {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.6rem;
+        margin: 0.35rem 0 0.55rem;
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        min-height: 52px;
+        padding: 0.55rem 0.7rem;
+        border: 1px solid $sage-wash;
+        border-radius: 12px;
+        background: $ivory;
+    }
+
+    dt {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        color: $navy;
+        font-family: $isans;
+    }
+
+    dt svg {
+        width: 1.15rem;
+        height: 1.15rem;
+        flex: 0 0 auto;
+    }
+
+    dd {
+        margin: 0;
+        color: $navy;
+        font-family: $ibm;
+        font-size: 1.15rem;
+        font-weight: 600;
+    }
+
+    p {
+        margin: 0;
+        color: $olive;
+        font-size: 0.92rem;
+    }
+}
+
+.cost-table-wrap {
+    overflow-x: auto;
+}
+
+.cost-preview table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: $isans;
+    font-size: 0.92rem;
+
+    th,
+    td {
+        padding: 0.55rem 0.4rem;
+        border-bottom: 1px solid $oat;
+        text-align: left;
+        vertical-align: top;
+    }
+
+    th {
+        color: $navy;
+        font-family: $isans;
+        font-size: 0.78rem;
+        font-weight: 500;
+    }
+}
+
+.cost-confidence {
+    display: block;
+    margin-top: 0.2rem;
+    color: $olive;
+    font-family: $isans;
+    font-size: 0.78rem;
+    font-weight: 400;
+}
+
+.cost-totals {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem 1rem;
+    margin: 0.8rem 0;
+
+    div {
+        padding: 0.55rem 0;
+        border-top: 1px solid $sage-wash;
+    }
+
+    dt {
+        color: $olive;
+        font-family: $isans;
+        font-size: 0.75rem;
+    }
+
+    dd {
+        margin: 0.15rem 0 0;
+        color: $navy;
+        font-family: $isans;
+    }
+}
+
+.supplier-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.supplier-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        padding: 0.85rem 0;
+        border-top: 1px solid $oat;
+    }
+
+    h4 {
+        margin: 0 0 0.25rem;
+        font-size: 1rem;
+    }
+
+    p {
+        margin: 0.15rem 0;
+    }
+
+    a {
+        color: $navy;
+    }
+}
+
+.supplier-map {
+    width: 100%;
+    height: 320px;
+    border-radius: 12px;
+    background: $botanical;
+}
+
+.supplier-map-wrap p {
+    margin: 0.4rem 0 0;
+    color: $olive;
+    font-size: 0.85rem;
+}
+
+.blueprint-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: $isans;
+        font-size: 0.9rem;
+    }
+
+    th,
+    td {
+        padding: 0.35rem 0.4rem;
+        border-bottom: 1px solid $sage-wash;
+        text-align: left;
+    }
+}
+
+.blueprint-tools,
+.blueprint-files {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.blueprint-tools button,
+.blueprint-preview > button {
+    min-height: 44px;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid $olive;
+    border-radius: 10px;
+    background: $ivory;
+    color: $navy;
+    font-family: $isans;
+    cursor: pointer;
+}
+
+.blueprint-tools button[aria-pressed='true'] {
+    background: $sage-wash;
+}
+
+.scene-viewer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.scene-canvas {
+    width: 100%;
+    height: 380px;
+    border: 1px solid $olive;
+    border-radius: 12px;
+    background: $ivory;
+}
+
+.scene-debug {
+    font-size: 0.8rem;
+}
+
+.blueprint-frame {
+    overflow: auto;
+    max-height: 420px;
+    border: 1px solid $olive;
+    border-radius: 12px;
+    background: $ivory;
+}
+
+.blueprint-stage {
+    min-width: 100%;
+
+    svg {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
+
+.quantity-list summary {
+    cursor: pointer;
+}
+
+@media (max-width: 430px) {
+    .cost-preview table {
+        font-size: 0.82rem;
+    }
+
+    .pdf-frame {
+        height: 70vh;
+    }
+}

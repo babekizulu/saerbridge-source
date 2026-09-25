@@ -1,0 +1,35 @@
+@use './utils' as *;
+
+.item-palette {
+    width: min(700px, 100%);
+    margin: 1.5rem auto 0;
+
+    h2 {
+        margin: 1.4rem 0 0.45rem;
+        color: $navy;
+        font-family: $isans;
+        font-size: 1.25rem;
+        font-weight: 560;
+    }
+}
+
+.palette-group {
+    margin: 0 0 0.55rem;
+    border-bottom: 1px solid #d5d5d5;
+
+    summary {
+        min-height: 44px;
+        padding: 0.55rem 0;
+        color: $dark;
+        font-family: $gsans;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+    }
+}
+
+.item-palette-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}

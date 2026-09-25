@@ -1,0 +1,41 @@
+# Saerbridge Source
+
+Home and renovation planning with a React/Vite frontend and an Express backend. Generated plans, images, quantities and indicative costs require professional review before construction.
+
+## One repository, two deployments
+
+Keep `client/` and `server/` in this repository. They have separate lockfiles and deployment services; a coordinated API/UI change can be reviewed in one pull request. Use short feature branches, pull requests and the included GitHub Actions checks. Never commit `.env`, private keys, node_modules or generated user files. Create release tags after the hosted app passes smoke tests. Separate repositories are only useful later if the apps have independent teams, permissions or release cycles.
+
+## Local development
+
+Use Node 24. Run `npm ci` in both client and server. Copy `server/.env.example` to `server/.env` and fill OPENAI_API_KEY locally. In separate terminals run `npm run dev` inside server and client. Open http://localhost:5173. The Vite proxy forwards `/api` to port 3011. Run `npm test` in server and `npm run lint` / `npm run build` in client.
+
+## Netlify frontend
+
+Import this GitHub repository. The root `netlify.toml` sets base `client`, build `npm run build`, publish `dist` and SPA routing. Set **VITE_API_BASE_URL** to your Railway public HTTPS origin (no trailing `/api`). Rebuild after changing it. Do not use a short-timeout serverless proxy for the long-running image stream. The included Content Security Policy permits Railway's `*.up.railway.app` domains; add your exact backend origin to `client/public/_headers` if using a custom domain.
+
+## Railway backend
+
+Deploy the same repository with service root **/server** and config file **/server/railway.json**. Generate a public HTTPS domain. Set NODE_ENV=production, OPENAI_API_KEY and ALLOWED_ORIGINS to the exact Netlify HTTPS site origin (comma-separate additional trusted origins). Railway supplies PORT. Set DATA_ENCRYPTION_PRIVATE_KEY to a stable RSA private key (PEM with actual newlines) through Railway's secret variables; retain it across restarts. The backend uses Windows/system certificates locally without disabling TLS validation.
+
+Use one Railway replica for this initial release: email capabilities, request limits and project state live in process memory. Health path is `/api/health`. A restart clears pending email links. Before a broad public launch, add authenticated quotas or bot protection, persistent project/job storage and shared rate limiting, plus provider spending limits. The existing per-IP limiter is not a substitute for user authentication or a cost budget. GitHub stores the code; pushing it alone does not provision Netlify or Railway hosting.
+
+## Email with Resend
+
+Verify a domain in Resend, create a sending API key, and set **RESEND_API_KEY** and **EMAIL_FROM** (for example `Saerbridge Source <designs@your-verified-domain>`) on Railway only. Never put either secret in a VITE variable. Regenerate a design after enabling these settings. The “Email my design” form includes the available PDF, CSV, plan JSON and image. It requires a valid address and explicit consent. It reports provider acceptance, not confirmed inbox delivery.
+
+The backend issues random capabilities valid for 30 minutes, binds each design to one recipient and uses provider idempotency keys with at most three attempts. It only accepts server-created attachments, not client URLs/body text/files. The in-memory cache is bounded at 32 MB and 100 entries; older links can expire early under load. No email address or capability is placed in a URL or browser storage. Resend handles the email and attachments according to its retention policy. Without credentials, the UI explains that downloads are available instead. Automated tests use a fake provider; a real delivery test requires your credentials and an authorized recipient.
+
+## PWA and mobile
+
+The manifest includes standard and maskable icons. Eligible Chrome browsers show an in-app installation suggestion; the permanent Install app action offers manual instructions on other browsers. Browsers decide eligibility and whether to expose the native prompt. Production requires HTTPS. The production build generates a versioned service worker that caches static app files; it deliberately never caches API data, photos or generated reports. Existing results and unsaved inputs are session-only and are lost on reload. Generation, suppliers and email require connectivity. New service workers wait until existing app tabs close to avoid breaking an active generation.
+
+Mobile uses tap-to-add tiles with native vertical scrolling; desktop retains drag/drop, validated catalog payloads, edge scrolling and cancel cleanup. Results expand to a full-screen view on tablets/phones with safe-area spacing, fixed centered navigation, visible labels, keyboard focus containment and 48px-or-larger main controls. The 3D viewer loads only when selected.
+
+## Reference documentation
+
+- [Android touch target guidance](https://developer.android.com/guide/topics/ui/accessibility/views/apps-views)
+- [PWA installation prompt](https://web.dev/learn/pwa/installation-prompt)
+- [Resend send-email API](https://resend.com/docs/api-reference/emails/send-email)
+- [Netlify monorepos](https://docs.netlify.com/build/configure-builds/monorepos/)
+- [Railway monorepos](https://docs.railway.com/deployments/monorepo)

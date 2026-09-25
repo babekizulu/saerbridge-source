@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+<title id="title">Burglar bars</title>
+<g fill="none" stroke="#355B44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+<rect x="26" y="25" width="76" height="78" rx="3" fill="#EAF7F5"/><path d="M64 29v70M30 64h68"/><path d="M42 29v70M86 29v70"/>
+</g>
+</svg>

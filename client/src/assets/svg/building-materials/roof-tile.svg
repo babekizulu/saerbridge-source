@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+<title id="title">Roof tile</title>
+<g fill="none" stroke="#355B44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+
+<path d="M22 75 64 33l42 42" fill="#F0DFC4"/>
+<path d="M31 68h66M39 59h50M47 50h34"/>
+
+</g>
+</svg>

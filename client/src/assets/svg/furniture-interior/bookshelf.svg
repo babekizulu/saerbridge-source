@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+<title id="title">Bookshelf</title>
+<g fill="none" stroke="#355B44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+<rect x="31" y="24" width="66" height="81" fill="#E7F0E2"/><path d="M31 49h66M31 75h66M49 31v18M61 56v19M78 82v23"/>
+</g>
+</svg>

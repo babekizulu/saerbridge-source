@@ -1,0 +1,135 @@
+@use './utils' as *;
+
+.property-tool {
+    width: min(700px, 100%);
+    margin: 0 auto 0.85rem;
+}
+
+.property-add,
+.property-summary {
+    color: $olive;
+    font-family: $isans;
+}
+
+.property-add {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 44px;
+    padding: 0.35rem 0.15rem;
+    border: none;
+    background: transparent;
+    color: $olive;
+    font-family: $isans;
+    font-size: 0.95rem;
+    cursor: pointer;
+
+    svg {
+        width: 1.1rem;
+        height: 1.1rem;
+        color: $green;
+    }
+}
+
+.property-summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem 0.7rem;
+
+    svg {
+        width: 1.1rem;
+        height: 1.1rem;
+        color: $green;
+    }
+
+    p {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+}
+
+.property-lead {
+    margin: 0 0 1rem;
+    font-size: 0.95rem;
+}
+
+.property-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem 1rem;
+}
+
+.property-notes {
+    grid-column: 1 / -1;
+}
+
+.property-field {
+    label {
+        display: block;
+        margin-bottom: 0.35rem;
+        color: $navy;
+        font-family: $ibm;
+        font-size: 0.75rem;
+    }
+}
+
+.property-input {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+
+    input,
+    textarea {
+        width: 100%;
+        min-height: 44px;
+        padding: 0.55rem 0.7rem;
+        border: 1px solid $light-active;
+        border-radius: 10px;
+        background: $light;
+        color: $dark;
+        font-family: $isans;
+        font-size: 1rem;
+    }
+
+    textarea {
+        min-height: 5.5rem;
+        resize: vertical;
+    }
+
+    span {
+        color: $olive;
+        font-family: $ibm;
+        font-size: 0.8rem;
+    }
+}
+
+.property-error {
+    margin: 0.35rem 0 0;
+    color: #6d2e2a;
+    font-size: 0.85rem;
+}
+
+.property-actions {
+    margin-top: 1rem;
+}
+
+.property-save {
+    border: 1px solid $navy;
+    border-radius: 10px;
+    background: $navy;
+    color: $light;
+    font-family: $ibm;
+    font-size: 0.8rem;
+    cursor: pointer;
+
+    &:hover {
+        background: $navy-active;
+    }
+}
+
+@media (max-width: 560px) {
+    .property-fields {
+        grid-template-columns: 1fr;
+    }
+}

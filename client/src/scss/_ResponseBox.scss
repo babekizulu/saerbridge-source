@@ -1,0 +1,45 @@
+@use './utils' as *;
+
+.response-box {
+    width: min(700px, 100%);
+    margin: 1.5rem auto 0;
+
+    p {
+        margin: 0 0 0.75rem;
+        color: $navy;
+        font-family: $isans;
+        font-size: 1rem;
+    }
+
+    img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    figcaption {
+        margin-top: 0.45rem;
+        color: $navy;
+        font-family: $isans;
+        font-size: 0.9rem;
+    }
+}
+
+.design-skeleton {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    background:
+        linear-gradient(110deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0) 70%),
+        linear-gradient(160deg, #e6e6e6, #cfcfcf 42%, #dedede 58%, #f2f2f2);
+    background-size: 220% 100%, 100% 100%;
+    animation: design-shimmer 2.8s ease-in-out infinite;
+}
+
+@keyframes design-shimmer {
+    from { background-position: 100% 0, 0 0; }
+    to { background-position: -20% 0, 0 0; }
+}

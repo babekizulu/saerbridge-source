@@ -1,0 +1,36 @@
+//imports
+@use './utils' as *;
+@use './Header' as *;
+@use './Logo' as *;
+@use './Sidebar' as *;
+@use './Footer' as *;
+@use './PDFGenerator' as *;
+@use './ResponseBox' as *;
+@use './DesignBox' as *;
+@use './Draggable' as *;
+@use './ItemPalette' as *;
+@use './Buttons' as *;
+@use './ProjectPlanner' as *;
+@use './Page' as *;
+@use './Dialog' as *;
+@use './PropertyDimensions' as *;
+@use './Results' as *;
+@use './ResultStudio' as *;
+@use './Accessibility' as *;
+@use './Mobile' as *;
+
+*::before, *::after, * {
+    @include reset;
+}
+
+body {
+    @include wh100;
+    background-color: #d3d3d3;
+    color: $dark;
+    font-family: $isans;
+}
+
+.app {
+    @include wh100;
+    @include grid1;
+}

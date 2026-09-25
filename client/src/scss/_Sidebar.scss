@@ -1,0 +1,105 @@
+@use './utils' as *;
+
+.sidebar {
+    position: fixed;
+    top: 72px;
+    width: 280px;
+    height: calc(100vh - 72px);
+    z-index: 2;
+    background-color: $light;
+    border-right: 1px solid $light-active;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+
+    nav {
+        position: relative;
+        margin-top: 1.25rem;
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            list-style: none;
+            padding: 0 1rem;
+            margin: 0;
+        }
+
+        li {
+            margin: 0;
+        }
+
+        a,
+        button {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 8px 8px;
+            border: none;
+            border-radius: 999px;
+            background: transparent;
+            color: $navy;
+            font-family: $gsans;
+            font-size: 0.86rem;
+            font-weight: 500;
+            line-height: 1.25;
+            letter-spacing: 0.01em;
+            text-align: left;
+            text-decoration: none;
+            cursor: pointer;
+            transition:
+                padding 280ms cubic-bezier(0.22, 1, 0.36, 1),
+                background-color 280ms ease,
+                color 280ms ease;
+
+            svg {
+                width: 1.15rem;
+                height: 1.15rem;
+                flex: none;
+            }
+
+            &:hover,
+            &:focus-visible,
+            &.is-active {
+                padding: 8px 14px;
+                background-color: #131313;
+                color: $light;
+            }
+
+            &:focus-visible {
+                outline: 3px solid $navy;
+                outline-offset: 3px;
+            }
+        }
+    }
+}
+
+@media (max-width: 860px) {
+    .sidebar {
+        position: relative;
+        top: auto;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid $light-active;
+        box-shadow: none;
+
+        nav {
+            margin-top: 0;
+
+            ul {
+                flex-direction: row;
+                gap: 0.35rem 1rem;
+                overflow-x: auto;
+                padding: 0.75rem 1rem;
+            }
+
+            a,
+            button {
+                width: auto;
+                white-space: nowrap;
+            }
+        }
+    }
+}

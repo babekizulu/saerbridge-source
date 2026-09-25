@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+<title id="title">Chain-link fence</title>
+<g fill="none" stroke="#355B44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+<rect x="24" y="34" width="80" height="58"/><path d="m24 34 80 58M24 92l80-58M44 34 24 58M64 34l24 58M84 34l20 48"/>
+</g>
+</svg>

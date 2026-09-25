@@ -1,0 +1,236 @@
+@use './utils' as *;
+
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    z-index: 10;
+    transform: translateY(-150%);
+    padding: 0.65rem 0.9rem;
+    border-radius: 50%;
+    background: $dark;
+    color: $light;
+    font-family: $ibm;
+    font-size: 0.9rem;
+    text-decoration: none;
+
+    &:focus {
+        transform: translateY(0.75rem);
+    }
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.page-main:focus {
+    outline: none;
+}
+
+:focus-visible {
+    outline: 3px solid $navy-active;
+    outline-offset: 3px;
+}
+
+.a11y-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.a11y-group {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.a11y-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: $dark;
+    color: $light;
+    cursor: pointer;
+    transition: background-color 220ms ease, color 220ms ease;
+
+    svg {
+        width: 1.05rem;
+        height: 1.05rem;
+    }
+
+    &.is-text-large svg {
+        width: 1.3rem;
+        height: 1.3rem;
+    }
+
+    &.is-text-larger svg {
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+
+    &[aria-pressed='true'],
+    &:hover,
+    &[aria-pressed='true']:hover {
+        background: $dark-active;
+        color: $light;
+    }
+}
+
+html[data-text='large'] {
+    font-size: 18px;
+}
+
+html[data-text='larger'] {
+    font-size: 20px;
+}
+
+@mixin high-contrast {
+    body {
+        background: #fff;
+        color: #000;
+    }
+
+    .header,
+    .sidebar {
+        background: #fff;
+        border-color: #000;
+    }
+
+    .logo-blue,
+    .sidebar nav a,
+    .sidebar nav button,
+    .modal-panel,
+    .modal-panel h2,
+    .modal-panel h3,
+    .planner-intro h1,
+    .design-tools,
+    .item-palette h2,
+    .response-box p,
+    .pdf-generator,
+    .design-note,
+    .design-pending {
+        color: #000;
+    }
+
+    .logo-green,
+    .design-box-placeholder,
+    .property-add,
+    .property-summary {
+        color: #145214;
+    }
+
+    .design-box,
+    .modal-panel,
+    .draggable {
+        border: 2px solid #000;
+        box-shadow: none;
+        background: #fff;
+    }
+
+    .design-box.has-items {
+        animation: none;
+        background-image: none;
+    }
+
+    .design-skeleton,
+    .site-photo-frame,
+    .supplier-map {
+        border: 2px solid #000;
+        background: #fff;
+        animation: none;
+    }
+
+    .draggable svg,
+    .howto-step-mark,
+    .space-tally dt svg {
+        color: #145214;
+    }
+
+    .a11y-btn {
+        border: none;
+        background: transparent;
+        color: #000;
+    }
+
+    .tool-btn,
+    .modal-close {
+        border-color: #000;
+        color: #000;
+        background: #fff;
+    }
+
+    .upload-btn,
+    .draggable-remove,
+    .property-save,
+    .a11y-btn[aria-pressed='true'],
+    .sidebar nav a:hover,
+    .sidebar nav a:focus-visible,
+    .sidebar nav a.is-active,
+    .sidebar nav button:hover,
+    .sidebar nav button:focus-visible,
+    .sidebar nav button.is-active {
+        background: #000;
+        color: #fff;
+        border-color: #000;
+    }
+}
+
+html[data-contrast='high'] {
+    @include high-contrast;
+}
+
+@media (prefers-contrast: more) {
+    @include high-contrast;
+}
+
+@mixin reduce-motion {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .sidebar nav a:hover {
+        transform: none;
+    }
+
+    .design-box.has-items {
+        animation: none;
+    }
+
+    .design-skeleton {
+        animation: none;
+        background: $sage-wash;
+    }
+}
+
+html[data-motion='reduce'] {
+    @include reduce-motion;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    @include reduce-motion;
+
+    .draggable.is-shaking {
+        animation: none;
+    }
+}

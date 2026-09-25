@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+<title id="title">Steel plate</title>
+<g fill="none" stroke="#355B44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+
+<path d="M26 42 64 24l38 18v44L64 104 26 86Z" fill="#E7F0E2"/>
+<path d="M26 42 64 60l38-18M64 60v44"/>
+
+
+</g>
+</svg>

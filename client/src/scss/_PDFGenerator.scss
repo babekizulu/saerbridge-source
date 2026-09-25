@@ -1,0 +1,40 @@
+@use './utils' as *;
+
+.pdf-generator {
+    display: inline-flex;
+    width: fit-content;
+    margin: 1rem 0 0;
+    color: $navy;
+    font-family: $isans;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+
+    &:hover {
+        color: $navy-active;
+    }
+}
+
+.pdf-preview {
+    width: min(700px, 100%);
+    margin: 1.5rem auto 0;
+
+    h3 {
+        margin: 0 0 0.75rem;
+        color: $navy;
+        font-family: $isans;
+        font-size: 1.15rem;
+        font-weight: 500;
+    }
+}
+
+.pdf-frame {
+    display: block;
+    width: 100%;
+    height: min(760px, 70vh);
+    min-height: 320px;
+    border: 1px solid $oat;
+    border-radius: 10px;
+    background: $ivory;
+}
