@@ -2,6 +2,8 @@
 
 Home and renovation planning with a React/Vite frontend and an Express backend. Generated plans, images, quantities and indicative costs require professional review before construction.
 
+Production frontend: https://source.saerbridge.com (Netlify). Backend health: https://saerbridge-source-production.up.railway.app/api/health (Railway). Both services deploy from `main` in this repository.
+
 ## One repository, two deployments
 
 Keep `client/` and `server/` in this repository. They have separate lockfiles and deployment services; a coordinated API/UI change can be reviewed in one pull request. Use short feature branches, pull requests and the included GitHub Actions checks. Never commit `.env`, private keys, node_modules or generated user files. Create release tags after the hosted app passes smoke tests. Separate repositories are only useful later if the apps have independent teams, permissions or release cycles.
@@ -16,7 +18,7 @@ Import this GitHub repository. The root `netlify.toml` sets base `client`, build
 
 ## Railway backend
 
-Deploy the same repository with service root **/server** and config file **/server/railway.json**. Generate a public HTTPS domain. Set NODE_ENV=production, OPENAI_API_KEY and ALLOWED_ORIGINS to the exact Netlify HTTPS site origin (comma-separate additional trusted origins). Railway supplies PORT. Set DATA_ENCRYPTION_PRIVATE_KEY to a stable RSA private key (PEM with actual newlines) through Railway's secret variables; retain it across restarts. The backend uses Windows/system certificates locally without disabling TLS validation.
+Deploy the same repository with service root **/server**, Railpack builder, start command **npm start**, and health check **/api/health**. Configure these in Railway service settings: new services cannot opt into the deprecated config-as-code mechanism, so `server/railway.json` is a legacy reference rather than the active configuration. Generate a public HTTPS domain. Set NODE_ENV=production, OPENAI_API_KEY and ALLOWED_ORIGINS to the exact Netlify HTTPS site origin (comma-separate additional trusted origins). The current deployment uses PORT=3011 with the public domain targeting port 3011. Set DATA_ENCRYPTION_PRIVATE_KEY to a stable RSA private key (PEM with actual newlines) through Railway's secret variables; retain it across restarts. The backend uses Windows/system certificates locally without disabling TLS validation.
 
 Use one Railway replica for this initial release: email capabilities, request limits and project state live in process memory. Health path is `/api/health`. A restart clears pending email links. Before a broad public launch, add authenticated quotas or bot protection, persistent project/job storage and shared rate limiting, plus provider spending limits. The existing per-IP limiter is not a substitute for user authentication or a cost budget. GitHub stores the code; pushing it alone does not provision Netlify or Railway hosting.
 
