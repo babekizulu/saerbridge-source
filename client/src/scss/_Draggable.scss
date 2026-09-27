@@ -1,84 +1,75 @@
 @use './utils' as *;
-
 .draggable {
-    @include flex-column-center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $space-2;
     position: relative;
-    flex: 0 0 104px;
-    width: 104px;
+    min-width: 0;
     min-height: 112px;
-    height: auto;
-    padding: 8px;
-    font: inherit;
-    border: none;
-    background: #fff;
-    box-shadow: 0 6px 16px rgba(19, 19, 19, 0.08);
-    border-radius: 22px;
+    max-width: 100%;
+    padding: $space-3;
+    border: 1px solid $sage-wash;
+    border-radius: $card-radius;
     background: $light;
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.08);
     color: $navy;
+    font: inherit;
     cursor: grab;
     user-select: none;
-
+    touch-action: pan-y;
     svg,
     img {
         width: 36px;
         height: 36px;
-        flex: 0 0 auto;
-        color: $green;
+        flex: none;
         object-fit: contain;
     }
-
     span {
         max-width: 100%;
-        font-family: $ibm;
-        font-size: 0.72rem;
-        font-weight: 500;
-        line-height: 1.15;
         text-align: center;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
+        line-height: 1.4;
     }
-
-    &:active {
-        cursor: grabbing;
+    &:hover {
+        border-color: $olive;
+        background: $ivory;
     }
 }
-
+.draggable.is-placed {
+    flex: 1 1 10rem;
+    cursor: default;
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    justify-items: start;
+    span {
+        text-align: left;
+    }
+}
+.draggable-remove {
+    grid-column: 1 / -1;
+    justify-self: end;
+    min-width: $control-height;
+    min-height: $control-height;
+    padding: $space-2;
+    border: 1px solid $olive;
+    border-radius: 8px;
+    background: $light;
+    color: $navy;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
 .draggable.is-shaking {
     animation: tile-shake 0.36s ease;
 }
-
 @keyframes tile-shake {
     0%,
-    100% { transform: translateX(0); }
-    20% { transform: translateX(-5px); }
-    40% { transform: translateX(5px); }
-    60% { transform: translateX(-3px); }
-    80% { transform: translateX(3px); }
-}
-
-.draggable.is-placed {
-    cursor: default;
-}
-
-.draggable-remove {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    width: 28px;
-    height: 28px;
-    padding: 0;
-    border: none;
-    border-radius: 50%;
-    background: $navy;
-    color: $light;
-    font-size: 1rem;
-    line-height: 28px;
-    cursor: pointer;
-
-    &:hover {
-        background: $navy-active;
+    100% {
+        transform: translateX(0);
+    }
+    40% {
+        transform: translateX(2px);
+    }
+    60% {
+        transform: translateX(-2px);
     }
 }

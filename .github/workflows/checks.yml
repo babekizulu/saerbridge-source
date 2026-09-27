@@ -20,6 +20,13 @@ jobs:
         working-directory: client
       - run: node --test pwa.test.mjs
         working-directory: client
+      - run: npm ci
+        working-directory: server
+      - run: npx playwright install --with-deps chromium
+        working-directory: client
+      - run: npm run test:ui
+        working-directory: client
+        timeout-minutes: 10
   server:
     runs-on: ubuntu-latest
     steps:

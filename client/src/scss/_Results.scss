@@ -4,7 +4,7 @@
 .location-field,
 .result-dashboard,
 .generate-hint {
-    width: min(700px, 100%);
+    width: 100%;
     margin: 0 auto 1.25rem;
 }
 
@@ -28,7 +28,7 @@
     min-height: 180px;
     padding: 1.1rem;
     border: none;
-    box-shadow: 0 8px 20px rgba(19, 19, 19, 0.08);
+    border: 1px solid $sage-wash;
     background: #fff;
     border-radius: 16px;
     background: #fff;
@@ -97,35 +97,8 @@
 
 .location-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.7rem;
-    margin-top: 0.6rem;
-
-    label {
-        display: flex;
-        flex-direction: column;
-        gap: 0.3rem;
-        color: $navy;
-        font-family: $isans;
-        font-size: 0.8rem;
-    }
-
-    input {
-        min-height: 44px;
-        padding: 0.4rem 0.7rem;
-        border: 1px solid $green;
-        border-radius: 10px;
-        background: $light;
-        color: $dark;
-        font-family: $isans;
-        font-size: 1rem;
-    }
-}
-
-@media (min-width: 700px) {
-    .location-grid {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
+    gap: $space-3;
+    margin-top: $space-3;
 }
 
 .result-dashboard {
@@ -158,7 +131,7 @@
 .space-tally {
     dl {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
         gap: 0.6rem;
         margin: 0.35rem 0 0.55rem;
     }
@@ -205,11 +178,15 @@
 }
 
 .cost-table-wrap {
+    min-width: 0;
+    max-width: 100%;
     overflow-x: auto;
+    margin-block: $space-3;
 }
 
 .cost-preview table {
     width: 100%;
+    min-width: 48rem;
     border-collapse: collapse;
     font-family: $isans;
     font-size: 0.92rem;
@@ -225,7 +202,7 @@
     th {
         color: $navy;
         font-family: $isans;
-        font-size: 0.78rem;
+        font-size: 0.875rem;
         font-weight: 500;
     }
 }
@@ -235,13 +212,13 @@
     margin-top: 0.2rem;
     color: $olive;
     font-family: $isans;
-    font-size: 0.78rem;
+    font-size: 0.875rem;
     font-weight: 400;
 }
 
 .cost-totals {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
     gap: 0.6rem 1rem;
     margin: 0.8rem 0;
 
@@ -389,12 +366,89 @@
     cursor: pointer;
 }
 
-@media (max-width: 430px) {
-    .cost-preview table {
-        font-size: 0.82rem;
-    }
-
-    .pdf-frame {
-        height: 70vh;
-    }
+.cost-preview,
+.supplier-panel,
+.blueprint-preview,
+.scene-viewer,
+.pdf-preview {
+    min-width: 0;
+}
+.cost-preview,
+.supplier-panel {
+    margin-bottom: $space-6;
+}
+.cost-preview h4 {
+    margin-block: $space-4 $space-2;
+}
+.cost-estimate-total {
+    color: $navy;
+    font-size: 1.5rem;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+.cost-assumptions {
+    padding-left: $space-5;
+    margin-block: $space-3;
+}
+.cost-download {
+    width: 100%;
+    margin-block: $space-4;
+}
+.cost-scroll-hint {
+    color: $olive;
+    font-size: 0.875rem;
+}
+.cost-preview td,
+.cost-preview th {
+    min-width: 6rem;
+}
+.cost-preview th:first-child,
+.cost-preview td:nth-child(4) {
+    min-width: 14rem;
+    max-width: 20rem;
+    overflow-wrap: anywhere;
+}
+.cost-preview td:nth-child(5),
+.cost-preview td:nth-child(6) {
+    min-width: 9rem;
+}
+.supplier-list,
+.blueprint-preview,
+.scene-viewer {
+    overflow-wrap: anywhere;
+}
+.supplier-map-wrap,
+.supplier-map,
+.blueprint-frame,
+.scene-canvas {
+    min-width: 0;
+    max-width: 100%;
+}
+.blueprint-frame {
+    width: 100%;
+}
+.scene-canvas {
+    height: clamp(260px, 50vh, 480px) !important;
+    flex: none;
+}
+.blueprint-preview ul,
+.scene-viewer ul {
+    padding-left: $space-5;
+}
+.blueprint-preview .plan-cards {
+    padding-left: 0;
+}
+.blueprint-tools button {
+    min-height: $control-height;
+    font-size: 1rem;
+}
+.site-photo-consent input {
+    flex: none;
+}
+.site-photo-name {
+    overflow-wrap: anywhere;
+    max-width: 100%;
+}
+.pdf-preview-disclosure {
+    margin-top: $space-4;
 }

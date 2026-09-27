@@ -1,110 +1,58 @@
-import { useEffect, useRef, useState } from 'react';
-import { NavLink } from 'react-router';
-import { FiFileText, FiGrid, FiHelpCircle, FiHome, FiImage, FiMousePointer } from 'react-icons/fi';
-import HowToUseDialog from './HowToUseDialog';
-import TermsOfServiceDialog from './TermsOfServiceDialog';
+import { useEffect, useState } from 'react';
 
 const sections = [
-    { id: 'selection', label: 'Selection', icon: FiMousePointer },
-    { id: 'materials', label: 'Materials', icon: FiGrid },
-    { id: 'design-result', label: 'Design', icon: FiImage },
+    { id: 'selection', label: 'Selection' },
+    { id: 'materials', label: 'Materials' },
+    { id: 'design-result', label: 'Design' },
 ];
 
 function Sidebar() {
-    const [activeId, setActiveId] = useState('planner-intro');
-    const [helpOpen, setHelpOpen] = useState(false);
-    const [termsOpen, setTermsOpen] = useState(false);
-    const helpButton = useRef<HTMLButtonElement>(null);
-    const termsButton = useRef<HTMLButtonElement>(null);
-
+    const [activeId, setActiveId] = useState(() =>
+        sections.find(({ id }) => `#${id}` === window.location.hash)?.id || 'selection'
+    );
     useEffect(() => {
-        const nodes = ['planner-intro', ...sections.map((section) => section.id)]
-            .map((id) => document.getElementById(id))
-            .filter((node): node is HTMLElement => Boolean(node));
-        if (nodes.length === 0) return undefined;
-        const observer = new IntersectionObserver((entries) => {
-            const visible = entries
-                .filter((entry) => entry.isIntersecting)
-                .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-            if (visible?.target.id) setActiveId(visible.target.id);
-        }, { rootMargin: '-15% 0px -60% 0px', threshold: [0.15, 0.4, 0.75] });
-        nodes.forEach((node) => observer.observe(node));
-        return () => observer.disconnect();
+        // Both columns can be visible on desktop. Follow the chosen anchor,
+        // including browser history, instead of activating the empty result panel.
+        const syncSection = () => setActiveId(
+            sections.find(({ id }) => `#${id}` === window.location.hash)?.id || 'selection'
+        );
+        window.addEventListener('hashchange', syncSection);
+        return () => window.removeEventListener('hashchange', syncSection);
     }, []);
 
     return (
-        <aside className='sidebar'>
-            <nav aria-label='Primary'>
-                <ul>
-                    <li>
-                        <NavLink
-                            to='/'
-                            end
-                            className={activeId === 'planner-intro' ? 'is-active' : undefined}
-                            onClick={() => setActiveId('planner-intro')}
+        <nav className='sidebar' aria-label='Project sections'>
+            <ul className='section-links'>
+                {sections.map(({ id, label }) => (
+                    <li key={id}>
+                        <a
+                            href={`#${id}`}
+                            aria-current={activeId === id ? 'location' : undefined}
+                            onClick={() => setActiveId(id)}
                         >
-                            <FiHome aria-hidden='true' />
-                            Planner
-                        </NavLink>
+                            {label}
+                        </a>
                     </li>
-                    <li>
-                        <button
-                            ref={helpButton}
-                            type='button'
-                            className={helpOpen ? 'is-active' : undefined}
-                            aria-haspopup='dialog'
-                            aria-controls='howto-dialog'
-                            aria-expanded={helpOpen}
-                            onClick={() => setHelpOpen(true)}
-                        >
-                            <FiHelpCircle aria-hidden='true' />
-                            Guide
-                        </button>
-                    </li>
-                    <li>
-                        <button
-                            ref={termsButton}
-                            type='button'
-                            className={termsOpen ? 'is-active' : undefined}
-                            aria-haspopup='dialog'
-                            aria-controls='terms-dialog'
-                            aria-expanded={termsOpen}
-                            onClick={() => setTermsOpen(true)}
-                        >
-                            <FiFileText aria-hidden='true' />
-                            Terms
-                        </button>
-                    </li>
-                    {sections.map((section) => {
-                        const Icon = section.icon;
-                        return (
-                            <li key={section.id}>
-                                <a
-                                    href={`#${section.id}`}
-                                    className={activeId === section.id ? 'is-active' : undefined}
-                                    aria-current={activeId === section.id ? 'true' : undefined}
-                                    onClick={() => setActiveId(section.id)}
-                                >
-                                    <Icon aria-hidden='true' />
-                                    {section.label}
-                                </a>
-                            </li>
-                        );
-                    })}
-                </ul>
-            </nav>
-            <HowToUseDialog
-                open={helpOpen}
-                onClose={() => setHelpOpen(false)}
-                returnFocusRef={helpButton}
-            />
-            <TermsOfServiceDialog
-                open={termsOpen}
-                onClose={() => setTermsOpen(false)}
-                returnFocusRef={termsButton}
-            />
-        </aside>
+                ))}
+            </ul>
+            <div className='section-selector'>
+                <label htmlFor='project-section'>Project section</label>
+                <select
+                    id='project-section'
+                    value={activeId}
+                    onChange={(event) => {
+                        setActiveId(event.target.value);
+                        window.location.hash = event.target.value;
+                    }}
+                >
+                    {sections.map(({ id, label }) => (
+                        <option key={id} value={id}>
+                            {label}
+                        </option>
+                    ))}
+                </select>
+            </div>
+        </nav>
     );
 }
-
 export default Sidebar;

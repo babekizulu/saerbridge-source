@@ -19,18 +19,51 @@
 @use './Accessibility' as *;
 @use './Mobile' as *;
 
-*::before, *::after, * {
+*::before,
+*::after,
+* {
     @include reset;
 }
 
+html {
+    color-scheme: light;
+}
 body {
-    @include wh100;
-    background-color: #d3d3d3;
+    width: 100%;
+    background: $ivory;
     color: $dark;
     font-family: $isans;
+    line-height: 1.5;
 }
-
+#root,
 .app {
-    @include wh100;
-    @include grid1;
+    min-width: 0;
+    width: 100%;
+}
+.app {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+}
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+input,
+select,
+textarea {
+    max-width: 100%;
+}
+img,
+video,
+canvas,
+object,
+iframe {
+    max-width: 100%;
+}
+p,
+li,
+label {
+    min-width: 0;
 }

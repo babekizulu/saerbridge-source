@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { FiPause, FiType } from 'react-icons/fi';
-import { LuContrast } from 'react-icons/lu';
+import { FiPause, FiType, FiSun } from 'react-icons/fi';
 import { loadPrefs, savePrefs, type A11yPrefs, type TextSize } from '../a11y';
 
 const textSizes: { id: TextSize; label: string; className: string }[] = [
@@ -19,6 +18,7 @@ function AccessibilityBar() {
 
     return (
         <div className='a11y-bar' aria-label='Accessibility settings'>
+            <p>Text size</p>
             <div className='a11y-group' role='group' aria-label='Text size'>
                 {textSizes.map((size) => (
                     <button
@@ -30,6 +30,7 @@ function AccessibilityBar() {
                         onClick={() => update({ ...prefs, textSize: size.id })}
                     >
                         <FiType aria-hidden='true' />
+                        <span>{size.label.replace(' text size', '')}</span>
                     </button>
                 ))}
             </div>
@@ -38,24 +39,30 @@ function AccessibilityBar() {
                 className='a11y-btn'
                 aria-label='High contrast'
                 aria-pressed={prefs.contrast === 'high'}
-                onClick={() => update({
-                    ...prefs,
-                    contrast: prefs.contrast === 'high' ? 'default' : 'high',
-                })}
+                onClick={() =>
+                    update({
+                        ...prefs,
+                        contrast: prefs.contrast === 'high' ? 'default' : 'high',
+                    })
+                }
             >
-                <LuContrast aria-hidden='true' />
+                <FiSun aria-hidden='true' />
+                <span>High contrast</span>
             </button>
             <button
                 type='button'
                 className='a11y-btn'
                 aria-label='Reduce motion'
                 aria-pressed={prefs.motion === 'reduce'}
-                onClick={() => update({
-                    ...prefs,
-                    motion: prefs.motion === 'reduce' ? 'system' : 'reduce',
-                })}
+                onClick={() =>
+                    update({
+                        ...prefs,
+                        motion: prefs.motion === 'reduce' ? 'system' : 'reduce',
+                    })
+                }
             >
                 <FiPause aria-hidden='true' />
+                <span>Reduce motion</span>
             </button>
         </div>
     );

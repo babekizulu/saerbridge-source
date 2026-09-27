@@ -1,425 +1,336 @@
 @use './utils' as *;
-
 .project-planner {
-    position: relative;
-    top: 96px;
-    min-height: calc(100vh - 96px);
-    margin-left: 300px;
-    margin-right: 0;
-    padding: 1.25rem 1.5rem 1.5rem;
-    background-color: #d3d3d3;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: $space-8;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: $space-6 max($page-gutter, env(safe-area-inset-right)) $space-8
+        max($page-gutter, env(safe-area-inset-left));
 }
-
-@media (min-width: 1180px) {
-    .project-planner {
-        margin-right: 376px;
-    }
+.planner-main,
+.page-main {
+    min-width: 0;
 }
-
-@media (max-width: 860px) {
-    .project-planner {
-        top: 0;
-        margin-left: 1rem;
-        margin-right: 1rem;
-    }
+.planner-intro,
+.design-tools,
+.planner-cards {
+    width: 100%;
+    margin: 0 0 $space-6;
 }
-
 .planner-intro {
-    width: min(700px, 100%);
-    margin: 0 auto 1.25rem;
-    scroll-margin-top: 96px;
-
     h1 {
-        margin: 0 0 0.4rem;
+        margin-bottom: $space-2;
         color: $navy;
-        font-family: $isans;
-        font-size: 1.6rem;
-        font-weight: 500;
+        font-family: $sourceserif;
+        font-size: 1.875rem;
+        font-weight: 600;
+        line-height: 1.2;
     }
-
     p {
-        margin: 0;
         color: $dark-active;
-        font-family: $isans;
-        font-size: 1.05rem;
-        line-height: 1.45;
+        line-height: 1.5;
     }
 }
-
-.design-tools {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.75rem 1rem;
-    width: min(700px, 100%);
-    margin: 0 auto 0.85rem;
-    color: $navy;
-    font-family: $ibm;
-    font-size: 0.85rem;
-    scroll-margin-top: 96px;
+.planner-howto {
+    margin-block: $space-2 $space-4;
 }
-
-.row-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    min-height: 44px;
+summary {
     cursor: pointer;
-
-    input {
-        width: 1.15rem;
-        height: 1.15rem;
-        accent-color: $navy;
-    }
+    min-height: $control-height;
+    padding-block: $space-3;
 }
-
-.tool-btn {
-    min-height: 44px;
-    padding: 0.4rem 0.85rem;
-    border: 1px solid $navy;
-    border-radius: 10px;
-    background: $light;
-    color: $navy;
-    font-family: $ibm;
-    font-size: 0.8rem;
+.concept-name {
+    display: grid;
+    gap: $space-2;
     font-weight: 500;
-    cursor: pointer;
-
-    &:hover:not(:disabled) {
-        background: $navy;
-        color: $light;
-    }
-
-    &:disabled {
-        opacity: 0.45;
-        cursor: default;
-    }
 }
-
-.design-count {
-    margin: 0;
-}
-
-.design-pending,
-.design-note {
-    width: min(700px, 100%);
-    margin: 1rem auto 0;
-    color: $navy;
-    font-family: $isans;
-    line-height: 1.45;
-}
-
-.design-result {
-    scroll-margin-top: 96px;
-}
-
-#materials {
-    scroll-margin-top: 96px;
-}
-
 .planner-cards {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.8rem;
-    width: min(760px, 100%);
-    margin: 0 auto 1rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: $space-4;
 }
-
-@media (min-width: 800px) {
-    .planner-cards {
-        grid-template-columns: 1fr 1fr;
+.planner-card {
+    min-width: 0;
+    padding: $space-4;
+    border: 1px solid $sage-wash;
+    border-radius: $card-radius;
+    background: $light;
+}
+.planner-card-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: $space-2;
+    margin-bottom: $space-4;
+    h2 {
+        display: flex;
+        align-items: flex-start;
+        gap: $space-2;
+        flex: 1 1 8rem;
+        min-width: 0;
+        color: $navy;
+        font-size: 1.125rem;
+        line-height: 1.4;
+    }
+    h2 svg {
+        flex: none;
+        margin-top: 0.15em;
     }
 }
-
-.residence-card {
-    grid-column: 1 / -1;
-}
-
 .residence-tools {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    flex-wrap: wrap;
+    gap: $space-2;
 }
-
+.residence-card {
+    grid-column: 1 / -1;
+}
 .residence-options {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.45rem;
-    margin: 0;
-    padding: 0;
-    border: none;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+    gap: $space-2;
+    border: 0;
+    min-width: 0;
 }
-
 .residence-option {
     position: relative;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    min-height: 44px;
-    padding: 0.45rem 0.6rem;
+    gap: $space-2;
+    min-height: $control-height;
+    min-width: 0;
+    padding: $space-3;
     border: 1px solid $sage-wash;
-    border-radius: 10px;
-    background: $light;
+    border-radius: 8px;
     color: $navy;
-    font-family: $isans;
-    font-size: 0.95rem;
     cursor: pointer;
-
     input {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        margin: 0;
-        opacity: 0;
+        flex: none;
+        width: 1em;
+        height: 1em;
+        accent-color: $navy;
     }
-
     svg {
-        width: 1.15rem;
-        height: 1.15rem;
-        flex: 0 0 auto;
+        display: none;
     }
-
     &:has(input:focus-visible) {
         outline: 3px solid $navy-active;
         outline-offset: 3px;
     }
-
     &.is-selected {
-        border-color: $navy;
-        background: $navy;
-        color: $light;
+        background: $botanical;
+        border-color: $olive;
+        font-weight: 600;
     }
 }
-
-@media (min-width: 700px) {
-    .residence-options {
-        grid-template-columns: repeat(4, 1fr);
-    }
+.planner-card-fields {
+    display: grid;
+    gap: $space-3;
 }
-
-.planner-card {
-    padding: 0.9rem;
-    border: none;
-    border-radius: 14px;
-    background: #fff;
-    box-shadow: 0 8px 20px rgba(19, 19, 19, 0.08);
+.planner-card-fields label,
+.location-grid label {
+    display: grid;
+    gap: $space-2;
+    min-width: 0;
+    color: $navy;
+    font-size: 1rem;
 }
-
-.planner-card-heading {
+.planner-card-fields input,
+.concept-name input,
+.location-grid input,
+.section-selector select {
+    width: 100%;
+    min-width: 0;
+    min-height: $control-height;
+    padding: $space-3;
+    border: 1px solid $green;
+    border-radius: 8px;
+    background: $light;
+    color: $dark;
+    font: inherit;
+}
+.design-tools {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    margin-bottom: 0.65rem;
-
-    h2 {
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-        margin: 0;
-        color: $navy;
-        font-family: $isans;
-        font-size: 1.05rem;
-        font-weight: 650;
-    }
+    flex-wrap: wrap;
+    gap: $space-3;
+    color: $navy;
 }
-
-.planner-card-fields {
+.row-toggle {
     display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-
-    label {
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-        color: $navy;
-        font-family: $isans;
-        font-size: 0.85rem;
-    }
-
+    align-items: center;
+    gap: $space-2;
+    min-height: $control-height;
+    cursor: pointer;
     input {
-        min-height: 42px;
-        padding: 0.35rem 0.6rem;
-        border: 1px solid $green;
-        border-radius: 8px;
-        background: $light;
-        color: $dark;
-        font-family: $isans;
-        font-size: 1rem;
+        flex: none;
+        width: 1.15em;
+        height: 1.15em;
+        accent-color: $navy;
     }
 }
-
-.palette-hint {
-    margin: -0.35rem 0 0.75rem;
-    color: $olive;
-    font-family: $isans;
+.tool-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: $space-2;
+    min-height: $control-height;
+    max-width: 100%;
+    min-width: 0;
+    padding: $space-2 $space-3;
+    border: 1px solid $olive;
+    border-radius: 8px;
+    background: $light;
+    color: $navy;
+    font: inherit;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    svg {
+        width: 1.2em;
+        height: 1.2em;
+        flex: none;
+    }
+    &:hover:not(:disabled) {
+        background: $oat;
+    }
+    &:disabled {
+        opacity: 0.6;
+        cursor: default;
+    }
 }
-
+.design-note,
+.design-pending {
+    margin-top: $space-4;
+    color: $navy;
+    line-height: 1.5;
+}
+.palette-hint {
+    margin-bottom: $space-3;
+    color: $olive;
+}
 .info-tip {
     position: relative;
     display: inline-flex;
+    flex: none;
 }
-
 .info-tip-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
-    border: 1px solid $navy;
-    border-radius: 50%;
+    width: $control-height;
+    height: $control-height;
+    border: 1px solid $sage-wash;
+    border-radius: 8px;
     background: $light;
     color: $navy;
     cursor: pointer;
-
-    svg {
-        width: 1rem;
-        height: 1rem;
-    }
 }
-
 .info-tip-panel {
     position: absolute;
     z-index: 5;
-    top: 38px;
+    top: 100%;
     right: 0;
-    width: min(280px, 72vw);
-    padding: 0.75rem;
+    width: min(17rem, 70vw);
+    padding: $space-3;
     border: 1px solid $olive;
-    border-radius: 10px;
+    border-radius: 8px;
     background: $ivory;
     color: $dark;
-    font-family: $isans;
-    font-size: 0.9rem;
-    line-height: 1.4;
+    line-height: 1.5;
 }
-
 .results-sidebar {
-    position: fixed;
-    top: 72px;
-    right: 0;
-    z-index: 4;
-    width: 360px;
-    height: calc(100vh - 82px);
-    margin: 0;
-    padding: 0.75rem;
-    overflow: auto;
-    background: #fff;
-    box-shadow: -8px 0 24px rgba(19, 19, 19, 0.08);
-    transition: width 420ms cubic-bezier(0.22, 1, 0.36, 1);
-
-    &.is-expanded {
-        width: calc(100vw - 280px);
-    }
-
-    @media (max-width: 860px) {
-        top: auto;
-        width: 100%;
-        height: auto;
-        position: relative;
-
-        &.is-expanded {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: calc(100vh - 10px);
-        }
-    }
-
+    min-width: 0;
+    width: 100%;
+    padding: $space-4;
+    border: 1px solid $sage-wash;
+    border-radius: $card-radius;
+    background: $light;
+    align-self: start;
     h2,
     h3 {
-        margin: 0 0 0.6rem;
+        margin-bottom: $space-3;
         color: $navy;
-        font-family: $isans;
-        font-weight: 650;
     }
-
-    .result-dashboard,
-    .pdf-preview,
-    .response-box,
-    .design-pending,
-    .design-note,
-    .cost-preview,
-    .supplier-panel {
+    &.is-expanded {
+        position: fixed;
+        inset: 0;
+        z-index: 10;
         width: 100%;
-        margin-left: 0;
-        margin-right: 0;
+        height: 100vh;
+        height: 100dvh;
+        padding: max($page-gutter, env(safe-area-inset-top))
+            max($page-gutter, env(safe-area-inset-right))
+            max($page-gutter, env(safe-area-inset-bottom))
+            max($page-gutter, env(safe-area-inset-left));
+        overflow: auto;
+        overscroll-behavior: contain;
+        border: 0;
+        border-radius: 0;
     }
 }
-
 .generation-progress {
     list-style: none;
-    margin: 0 0 1rem;
-    padding: 0;
-
+    margin-bottom: $space-4;
     li {
         display: grid;
-        grid-template-columns: 12px 1fr auto;
-        gap: 0.55rem;
+        grid-template-columns: 12px minmax(0, 1fr);
+        gap: $space-2;
         align-items: center;
-        padding: 0.4rem 0;
-        border-bottom: 1px dotted #d3d3d3;
-        color: $navy;
-        font-family: $isans;
+        padding-block: $space-2;
+        border-bottom: 1px dotted $sage-wash;
     }
 }
-
 .generation-mark {
     width: 10px;
     height: 10px;
     border: 2px solid $olive;
     border-radius: 50%;
 }
-
 .generation-progress li[data-state='active'] .generation-mark {
     background: $light-green;
 }
-
 .generation-progress li[data-state='done'] .generation-mark {
     background: $olive;
 }
-
-.generation-progress li[data-state='failed'] .generation-mark {
-    border-color: $navy;
-}
-
 .generation-state {
+    grid-column: 2;
     color: $olive;
-    font-size: 0.8rem;
 }
-
-.concept-name {
-    display: grid;
-    gap: 0.35rem;
-    margin: 0 0 0.8rem;
-    font-family: $gsans;
-    font-weight: 500;
-
-    input {
-        min-height: 44px;
-        padding: 0.4rem 0.7rem;
-        border: 1px solid #bdbdbd;
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.72);
-        font-family: $gsans;
-        font-size: 1rem;
-    }
-}
-
 .plan-cards {
     display: grid;
-    gap: 0.55rem;
-    margin: 0 0 1rem;
-    padding: 0;
+    gap: $space-2;
+    margin-bottom: $space-4;
     list-style: none;
-
     li {
         display: grid;
-        gap: 0.15rem;
-        padding: 0.7rem 0.8rem;
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.8);
+        gap: $space-1;
+        padding: $space-3;
+        border: 1px solid $sage-wash;
+        border-radius: 8px;
+    }
+}
+#planner-intro,
+#selection,
+#materials,
+#design-result {
+    scroll-margin-top: $space-4;
+}
+@media (min-width: 48rem) {
+    .planner-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .project-planner {
+        padding-inline: $space-8;
+    }
+}
+@media (min-width: 75rem) {
+    .project-planner {
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
     }
 }

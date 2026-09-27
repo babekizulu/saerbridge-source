@@ -1,7 +1,7 @@
 @use './utils' as *;
 
 .item-palette {
-    width: min(700px, 100%);
+    width: 100%;
     margin: 1.5rem auto 0;
 
     h2 {
@@ -29,7 +29,8 @@
 }
 
 .item-palette-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr));
+    gap: $space-2;
+    padding-bottom: $space-3;
 }

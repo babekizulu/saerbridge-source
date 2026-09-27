@@ -41,63 +41,49 @@
 }
 
 .a11y-bar {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 0.4rem;
+    display: grid;
+    gap: $space-3;
 }
-
 .a11y-group {
     display: flex;
-    align-items: center;
-    gap: 0.25rem;
+    flex-wrap: wrap;
+    gap: $space-2;
 }
-
 .a11y-btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    min-height: 44px;
-    padding: 0;
-    border: none;
-    border-radius: 50%;
-    background: $dark;
-    color: $light;
+    justify-content: flex-start;
+    gap: $space-2;
+    min-height: $control-height;
+    min-width: 0;
+    padding: $space-2 $space-3;
+    border: 1px solid $olive;
+    border-radius: 8px;
+    background: $light;
+    color: $navy;
+    font: inherit;
     cursor: pointer;
-    transition: background-color 220ms ease, color 220ms ease;
-
     svg {
-        width: 1.05rem;
-        height: 1.05rem;
+        flex: none;
+        width: 1.1em;
+        height: 1.1em;
     }
-
-    &.is-text-large svg {
-        width: 1.3rem;
-        height: 1.3rem;
-    }
-
-    &.is-text-larger svg {
-        width: 1.6rem;
-        height: 1.6rem;
-    }
-
-    &[aria-pressed='true'],
-    &:hover,
-    &[aria-pressed='true']:hover {
-        background: $dark-active;
+    &[aria-pressed='true'] {
+        background: $navy;
         color: $light;
+        box-shadow: inset 0 0 0 2px $light;
+    }
+    &:hover {
+        text-decoration: underline;
     }
 }
 
 html[data-text='large'] {
-    font-size: 18px;
+    font-size: 112.5%;
 }
 
 html[data-text='larger'] {
-    font-size: 20px;
+    font-size: 125%;
 }
 
 @mixin high-contrast {
@@ -107,14 +93,15 @@ html[data-text='larger'] {
     }
 
     .header,
-    .sidebar {
+    .sidebar,
+    .menu-dialog {
         background: #fff;
         border-color: #000;
     }
 
     .logo-blue,
-    .sidebar nav a,
-    .sidebar nav button,
+    .section-links a,
+    .menu-navigation button,
     .modal-panel,
     .modal-panel h2,
     .modal-panel h3,
@@ -169,6 +156,9 @@ html[data-text='larger'] {
     }
 
     .tool-btn,
+    .a11y-btn,
+    .menu-navigation a,
+    .menu-navigation button,
     .modal-close {
         border-color: #000;
         color: #000;
@@ -181,7 +171,7 @@ html[data-text='larger'] {
     .a11y-btn[aria-pressed='true'],
     .sidebar nav a:hover,
     .sidebar nav a:focus-visible,
-    .sidebar nav a.is-active,
+    .section-links a[aria-current],
     .sidebar nav button:hover,
     .sidebar nav button:focus-visible,
     .sidebar nav button.is-active {

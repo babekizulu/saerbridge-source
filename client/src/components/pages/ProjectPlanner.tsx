@@ -71,7 +71,7 @@ function ProjectPlanner() {
         const onKey = (event: KeyboardEvent) => {
             if (event.key === 'Escape') setStudioOpen(false);
             if (event.key !== 'Tab' || !panel) return;
-            const nodes = [...panel.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], input:not(:disabled), summary, select, [tabindex="0"]')].filter((node) => node.getClientRects().length);
+            const nodes = [...panel.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], input:not(:disabled), summary, select, textarea, iframe, object, [tabindex="0"]')].filter((node) => node.getClientRects().length);
             const first = nodes[0], last = nodes[nodes.length - 1];
             if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
             if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
@@ -81,7 +81,7 @@ function ProjectPlanner() {
             document.body.style.overflow = overflow;
             background.forEach((node) => { node.inert = false; });
             document.removeEventListener('keydown', onKey);
-            previous?.focus();
+            if (previous?.isConnected) previous.focus();
         };
     }, [studioOpen]);
 
@@ -298,7 +298,11 @@ function ProjectPlanner() {
         <div className='project-planner'>
             <div className='planner-main'>
             <div className='planner-intro' id='planner-intro'>
-                <h1>Project Planner</h1>
+                <h1>Project planner</h1>
+                <p>Plan a home with materials and furniture, or explore a renovation from a photograph you have permission to use.</p>
+                <details className='planner-howto'><summary>How it works</summary>
+                    <p>Add your project details and select items below. Generate when you are ready; you can edit your selection at any time.</p>
+                </details>
                 <label className='concept-name'>
                     Concept name
                     <input
@@ -314,11 +318,7 @@ function ProjectPlanner() {
                         }}
                     />
                 </label>
-                <p>
-                    Plan a new home concept from materials and furniture, or explore a renovation
-                    from a photograph of a dwelling you have permission to use. Designs aim for
-                    durability, safety, daylight, and careful use of space.
-                </p>
+
             </div>
             <div className='planner-cards'>
                 <ResidenceChoice value={residence} onChange={updateResidence} />
@@ -363,8 +363,8 @@ function ProjectPlanner() {
             />
             <ItemPalette onAdd={addItem} />
             </div>
-            {!studioOpen && status !== 'idle' ? <button className='mobile-results-button' onClick={() => setStudioOpen(true)}>{status === 'generating' ? 'View generation progress' : status === 'ready' ? 'View my design' : 'View design status'}</button> : null}
-            <aside className={studioOpen ? 'results-sidebar is-expanded' : 'results-sidebar'} id='design-result' role={studioOpen ? 'dialog' : undefined} aria-modal={studioOpen || undefined} aria-labelledby='design-result-heading'>
+
+            <aside className={studioOpen ? 'results-sidebar is-expanded' : 'results-sidebar'} id='design-result' role={studioOpen ? 'dialog' : undefined} aria-modal={studioOpen || undefined} aria-labelledby='design-result-heading' tabIndex={-1}>
                 <h2 id='design-result-heading' className='visually-hidden'>Design</h2>
                 <ResultStudio
                     open={studioOpen}

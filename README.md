@@ -32,7 +32,15 @@ The backend issues random capabilities valid for 30 minutes, binds each design t
 
 The manifest includes standard and maskable icons. Eligible Chrome browsers show an in-app installation suggestion; the permanent Install app action offers manual instructions on other browsers. Browsers decide eligibility and whether to expose the native prompt. Production requires HTTPS. The production build generates a versioned service worker that caches static app files; it deliberately never caches API data, photos or generated reports. Existing results and unsaved inputs are session-only and are lost on reload. Generation, suppliers and email require connectivity. New service workers wait until existing app tabs close to avoid breaking an active generation.
 
-Mobile uses tap-to-add tiles with native vertical scrolling; desktop retains drag/drop, validated catalog payloads, edge scrolling and cancel cleanup. Results expand to a full-screen view on tablets/phones with safe-area spacing, fixed centered navigation, visible labels, keyboard focus containment and 48px-or-larger main controls. The 3D viewer loads only when selected.
+The responsive shell uses a compact brand header, a native Menu dialog for navigation and saved accessibility settings, and independent Selection, Materials and Design links. Enlarged text uses a labelled section selector when the links no longer fit. Forms, selection cards and results stay in normal document flow; desktop uses a wider two-column planner/results layout. Tap-to-add, duplicate selections and desktop drag/drop are preserved. Expanded previews are actual modal views with focus containment, safe-area spacing, wrapping asset navigation and 48px-or-larger controls. The 3D viewer still loads only when selected.
+
+The cost CSV action is labelled “Download costs (CSV)” and sits between the estimate summary and a keyboard-focusable, horizontally scrollable breakdown. PDF open/download links remain available outside the optional embedded preview. Export payloads, filenames, plan geometry and request handling are unchanged.
+
+## Responsive regression tests
+
+Install both client and server dependencies with `npm ci` in each directory. In `client`, run `npx playwright install chromium` once, then `npm run test:ui`. Tests use the existing Node test runner with Playwright as a browser driver and start their own local Vite server on port 5179. All generation and supplier requests use deterministic fixtures; no paid generation or email requests run. Existing server and production PWA tests remain unchanged.
+
+Set `UI_BROWSER_CHANNEL=chrome` to use an installed Chrome, `UI_BASE_URL` to test an already running local frontend, or `UI_ARTIFACT_DIR` to save screenshots, a verified CSV and viewport measurements. The suite covers 320, 360, 375, 390, 412 and 430 CSS-pixel phones, short landscape, tablets, 1280/1440 desktop, 200% text, keyboard/menu focus, saved preferences, validation, consent, duplicate items, bounded previews and current-result downloads. Standalone display is simulated in the browser test; actual HONOR X7c scaling, virtual keyboard, browser chrome, installation and assistive technology still require physical-device verification.
 
 ## Reference documentation
 

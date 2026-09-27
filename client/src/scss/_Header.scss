@@ -1,25 +1,71 @@
 @use './utils' as *;
-
 .header {
-    position: fixed;
-    top: 0;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     justify-content: space-between;
-    gap: 1rem;
-    width: 100%;
-    min-height: 72px;
-    padding: 0.5rem 1.25rem;
-    border-bottom: 1px solid $light-active;
-    background-color: $light;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    z-index: 3;
+    gap: $space-2;
+    min-width: 0;
+    min-height: 60px;
+    padding: 6px max($page-gutter, env(safe-area-inset-right)) 6px
+        max($page-gutter, env(safe-area-inset-left));
+    border-bottom: 1px solid $oat;
+    background: $light;
 }
-
-@media (max-width: 860px) {
-    .header {
-        position: relative;
-        height: auto;
+.menu-trigger {
+    flex: none;
+}
+.menu-dialog {
+    width: min(32rem, calc(100% - 32px));
+    max-height: calc(100vh - 32px);
+    max-height: calc(100dvh - 32px);
+    margin: auto;
+    border: 1px solid $sage-wash;
+    border-radius: $card-radius;
+    background: $ivory;
+    color: $navy;
+    overflow: auto;
+    overscroll-behavior: contain;
+    &::backdrop {
+        background: rgba($navy, 0.48);
     }
+}
+.menu-panel {
+    padding: $space-4;
+}
+.menu-navigation {
+    display: grid;
+    gap: $space-2;
+    a,
+    button {
+        display: flex;
+        align-items: center;
+        gap: $space-2;
+        min-height: $control-height;
+        min-width: 0;
+        padding: $space-2 $space-3;
+        border: 1px solid $sage-wash;
+        border-radius: 8px;
+        background: $light;
+        color: $navy;
+        font: inherit;
+        text-decoration: none;
+        text-align: left;
+        cursor: pointer;
+        &:hover {
+            background: $oat;
+        }
+        svg {
+            flex: none;
+        }
+    }
+}
+.menu-settings {
+    margin: $space-6 0;
+    padding-top: $space-6;
+    border-top: 1px solid $sage-wash;
+}
+.menu-panel h3 {
+    font-size: 1rem;
+    margin-bottom: $space-2;
 }

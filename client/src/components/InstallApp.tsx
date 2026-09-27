@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 type InstallEvent = Event & { prompt: () => Promise<void>; userChoice: Promise<{ outcome: string }> };
 export default function InstallApp() {
     const [prompt, setPrompt] = useState<InstallEvent | null>(null);
@@ -24,7 +25,7 @@ export default function InstallApp() {
         finally { setPrompt(null); setDismissed(true); dialog.current?.close(); }
     }
     return <>
-        {offline ? <p className='offline-notice' role='status'>You’re offline. Reconnect to generate a design or send email.</p> : null}
+        {offline ? createPortal(<p className='offline-notice' role='status'>You’re offline. Reconnect to generate a design or send email.</p>, document.body) : null}
         {!installed ? <button className='tool-btn install-button' onClick={() => dialog.current?.showModal()}>Install app</button> : null}
         {!installed && prompt && !dismissed ? <aside className='install-banner' aria-label='Install Saerbridge'>
             <div><strong>Keep Source on your home screen</strong><p>Open your planner with one tap.</p></div>

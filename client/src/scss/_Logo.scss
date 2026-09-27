@@ -1,30 +1,30 @@
 @use './utils' as *;
-
 .logo {
-    @include flex-center;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 0;
+    color: $dark;
     font-size: 1.5rem;
     text-decoration: none;
-
     img {
-        width: 48px;
-        height: 48px;
+        width: 36px;
+        height: auto;
+        flex: none;
+        margin-right: $space-1;
     }
 }
-
-.logo-divider {
-    text-decoration: none;
-    color: $navy;
-}
-
 .logo-blue {
-    text-decoration: none;
     color: $dark;
     font-weight: 600;
 }
-
 .logo-grey {
-    text-decoration: none;
-    color: $light-active;
+    color: $olive;
     font-family: $sourceserif;
     font-style: italic;
+}
+@media (max-width: 36rem) {
+    .logo-blue {
+        display: none;
+    }
 }

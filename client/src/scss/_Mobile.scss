@@ -1,78 +1,86 @@
-// Android-inspired touch targets and adaptive surfaces; retain Source's palette.
-button, a, summary { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
-button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid #376f54; outline-offset: 3px; }
-.header-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.tool-btn, .info-tip-btn, .studio-close, .studio-download, .draggable-remove { min-height: 48px; min-width: 48px; }
-.studio-close { flex-shrink: 0; }
-.email-design { margin: 8px 0 16px; padding: 12px; border-radius: 16px; background: #edf2eb; }
-.email-design summary { min-height: 48px; cursor: pointer; padding: 12px 4px; font-weight: 600; }
-.email-design p { line-height: 1.5; margin: 8px 0; overflow-wrap: anywhere; }
-.email-design form { display: grid; gap: 10px; }
-.email-design input[type=email] { width: 100%; min-height: 48px; border: 1px solid #65756c; border-radius: 8px; padding: 12px; font: inherit; }
-.email-consent { display: flex; align-items: flex-start; gap: 12px; padding: 8px 0; line-height: 1.5; }
-.email-consent input { margin-top: 4px; flex: 0 0 24px; width: 24px; height: 24px; }
-.view-assets { width: 100%; }
-.results-sidebar.is-expanded { height: calc(100dvh - 72px); overflow: hidden; transition: none; }
-.results-sidebar.is-expanded .result-studio { height: 100%; min-height: 0; }
-.studio-bar { gap: 12px; flex: 0 0 auto; min-height: 56px; }
-.studio-bar p { overflow-wrap: anywhere; min-width: 0; }
-.studio-stage { min-height: 0; overscroll-behavior: contain; }
-.results-sidebar.is-expanded .studio-stage { padding-bottom: calc(112px + env(safe-area-inset-bottom, 0px)); }
-.results-sidebar.is-expanded .studio-tray { padding: 8px; gap: 4px; background: #e8eee6; border-radius: 28px; }
-.results-sidebar.is-expanded .studio-tray button { flex: 0 0 56px; width: 56px; height: 56px; flex-direction: column; gap: 4px; border-radius: 20px; color: #243c32; background: transparent; }
-.results-sidebar.is-expanded .studio-tray button.is-active { background: #243c32; color: #fff; }
-.studio-tray svg { width: 22px; height: 22px; }
-.studio-tray span { font-size: 11px; font-weight: 600; }
-.mobile-results-button { display: none; }
-.install-dialog { margin: auto; width: min(440px, calc(100% - 32px)); padding: 24px; border: 0; border-radius: 28px; color: #243c32; background: #f4f6f2; }
-.install-dialog::backdrop { background: #101b18aa; }
-.install-dialog p { margin: 16px 0; line-height: 1.6; }
-.install-dialog form { margin-top: 16px; text-align: right; }
-.install-banner { position: fixed; z-index: 12; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); left: 50%; transform: translateX(-50%); width: min(560px, calc(100% - 32px)); display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding: 20px; border-radius: 24px; background: #edf2eb; box-shadow: 0 8px 30px #0003; }
-.install-banner p { margin-top: 6px; }
-.install-banner div { flex: 1 1 200px; }
-.offline-notice { position: fixed; z-index: 15; top: 0; left: 0; right: 0; padding: 12px; background: #fff1cb; color: #322b15; text-align: center; }
-@media (max-width: 1179px) {
-    .project-planner { margin-right: 0; }
-    .results-sidebar { position: relative; top: auto; width: 100%; height: auto; border-radius: 24px; margin-top: 24px; }
-    .results-sidebar.is-expanded { position: fixed; inset: 0; z-index: 10; margin: 0; width: 100%; height: 100dvh; border-radius: 0; padding: max(8px, env(safe-area-inset-top)) 16px 0; }
-    .results-sidebar.is-expanded .studio-tray { right: 50%; max-width: calc(100% - 24px); bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
-    .mobile-results-button { display: block; position: fixed; z-index: 5; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); min-height: 56px; border: 0; border-radius: 16px; padding: 0 20px; background: #243c32; color: white; font: inherit; box-shadow: 0 4px 16px #0003; }
-    .planner-cards { grid-template-columns: 1fr; }
+@use './utils' as *;
+button,
+a,
+summary {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
-@media (max-width: 860px) {
-    .header { padding: 12px 16px; flex-wrap: wrap; gap: 8px; }
-    .header-actions { gap: 8px; }
-    .sidebar nav ul { flex-wrap: wrap; gap: 4px; padding: 8px 12px; }
-    .sidebar nav a, .sidebar nav button { min-height: 48px; padding: 10px 14px; }
-    .project-planner { margin: 0; padding: 24px 16px 100px; background: #f4f6f2; }
-    .planner-card { border-radius: 24px; padding: 16px; box-shadow: none; border: 1px solid #dce3d8; min-width: 0; }
-    .planner-card-fields input, .concept-name input { min-height: 52px; border-radius: 12px; font-size: 16px; }
-    .residence-option { min-height: 56px; border-radius: 16px; }
-    .row-toggle { min-height: 48px; }
-    .design-box { border-radius: 24px; }
-    .draggable { min-height: 64px; }
-    .draggable:not(.is-placed) { touch-action: pan-y; user-select: none; }
-    .draggable-remove { position: relative; top: auto; right: auto; flex-shrink: 0; }
-    .planner-intro h1 { font-size: 28px; }
-    .planner-cards { grid-template-columns: 1fr; }
-    .studio-stage img, .studio-stage svg { max-width: 100%; }
-    .studio-stage iframe { max-width: 100%; }
-    .scene-viewport { min-height: 320px; }
+.email-design {
+    padding: $space-3;
+    border: 1px solid $sage-wash;
+    border-radius: $card-radius;
+    background: $ivory;
 }
-@media (min-width: 700px) and (max-width: 860px) { .planner-cards { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 359px) { .results-sidebar.is-expanded .studio-tray { gap: 0; padding: 4px; } .results-sidebar.is-expanded .studio-tray button { flex-basis: 52px; width: 52px; } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
-
-.design-box.has-items, .design-box.can-generate { padding-bottom: 16px; }
-.design-box .design-box-clear, .design-box .upload-btn { position: static; min-height: 48px; margin-top: 8px; }
-.design-box .upload-btn { flex: 1 1 180px; }
-.design-box .design-box-clear { flex: 0 0 auto; }
-.results-sidebar .scene-canvas { height: 380px !important; min-height: 320px; flex: 0 0 auto; }
-.palette-group summary { min-height: 48px; }
-.site-footer { position: relative; z-index: auto; height: auto; padding: 12px 16px; font-size: 12px; line-height: 1.5; }
-.site-footer p { white-space: normal; }
-@media (max-width: 430px) {
-    .design-box .design-box-clear { flex: 1 1 100%; }
-    .design-box .upload-btn { flex: 1 1 100%; }
+.email-design p {
+    margin-block: $space-2;
+    overflow-wrap: anywhere;
+}
+.email-design form {
+    display: grid;
+    gap: $space-3;
+    min-width: 0;
+}
+.email-design input[type='email'] {
+    width: 100%;
+    min-width: 0;
+    min-height: $control-height;
+    padding: $space-3;
+    border: 1px solid $olive;
+    border-radius: 8px;
+    font: inherit;
+}
+.email-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-3;
+}
+.email-consent input {
+    flex: none;
+    width: 24px;
+    height: 24px;
+    margin-top: $space-1;
+}
+.view-assets {
+    width: 100%;
+}
+.install-dialog {
+    margin: auto;
+    width: min(28rem, calc(100% - 32px));
+    max-height: calc(100vh - 32px);
+    max-height: calc(100dvh - 32px);
+    overflow: auto;
+    padding: $space-4;
+    border: 1px solid $sage-wash;
+    border-radius: $card-radius;
+    color: $navy;
+    background: $ivory;
+}
+.install-dialog::backdrop {
+    background: rgba($navy, 0.48);
+}
+.install-dialog p {
+    margin-block: $space-4;
+}
+.install-dialog form {
+    margin-top: $space-4;
+    text-align: right;
+}
+.install-banner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-3;
+    margin-top: $space-4;
+    padding: $space-4;
+    border: 1px solid $sage-wash;
+    border-radius: $card-radius;
+    background: $botanical;
+}
+.install-banner div {
+    flex: 1 1 100%;
+}
+.offline-notice {
+    padding: $space-3;
+    background: $oat;
+    color: $dark;
+    text-align: center;
 }

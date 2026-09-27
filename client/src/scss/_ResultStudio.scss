@@ -1,122 +1,82 @@
 @use './utils' as *;
-
 .result-studio {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    min-height: 100%;
+    gap: $space-4;
+    min-width: 0;
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
     color: $dark;
 }
-
 .studio-bar {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    min-height: 36px;
-    font-family: $gsans;
-    font-weight: 500;
-
-    p {
-        margin: 0;
-    }
+    gap: $space-3;
+    font-weight: 600;
 }
-
-.studio-thumb {
-    display: block;
-    width: 100%;
-    padding: 0;
-    border: none;
-    border-radius: 12px;
-    background: #fff;
-    box-shadow: 0 8px 20px rgba(19, 19, 19, 0.08);
-    cursor: pointer;
-    overflow: hidden;
-
-    img,
-    .design-skeleton {
-        display: block;
-        width: 100%;
-        aspect-ratio: 1 / 1;
-    }
+.studio-bar p {
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
-
-.studio-close,
-.studio-download,
-.studio-tray button {
+.studio-close {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius: 50%;
-    background: $dark;
-    color: $light;
-    font-family: $gsans;
+    flex: none;
+    flex-wrap: wrap;
+    gap: $space-2;
+    min-height: $control-height;
+    min-width: $control-height;
+    padding: $space-2;
+    border: 1px solid $olive;
+    border-radius: 8px;
+    background: $light;
+    color: $navy;
+    font: inherit;
     cursor: pointer;
-    transition: background-color 220ms ease;
-
-    &:hover {
-        background: $dark-active;
-    }
 }
-
-.studio-stage {
-    flex: 1;
-    overflow: auto;
-}
-
+.studio-stage,
 .studio-file {
-    position: relative;
+    min-width: 0;
 }
-
-.studio-download {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    text-decoration: none;
+.studio-stage {
+    display: grid;
+    gap: $space-4;
 }
-
 .studio-tray {
     display: flex;
-    gap: 8px;
-    margin-top: auto;
-    padding: 8px;
-    border-radius: 22px;
-    background: #fff;
-    box-shadow: 0 8px 20px rgba(19, 19, 19, 0.08);
-
-    button.is-active {
-        background: $dark-active;
-    }
-}
-
-// Keep asset navigation centred in the expanded panel, independent of scrolling.
-.results-sidebar.is-expanded {
-    .studio-stage {
-        padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
-    }
-
-    .studio-tray {
-        position: fixed;
-        z-index: 6;
-        right: calc((100vw - 280px) / 2);
-        bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-        transform: translateX(50%);
-        width: max-content;
-        max-width: calc(100vw - 304px);
+    flex-wrap: wrap;
+    gap: $space-2;
+    border-bottom: 1px solid $sage-wash;
+    padding-bottom: $space-3;
+    button {
+        display: inline-flex;
+        flex: 1 1 auto;
+        align-items: center;
         justify-content: center;
-        margin: 0;
-
-        button {
-            flex: 0 0 40px;
-        }
+        gap: $space-2;
+        min-height: $control-height;
+        min-width: 0;
+        padding: $space-2;
+        border: 1px solid $sage-wash;
+        border-radius: 8px;
+        color: $navy;
+        background: $light;
+        font: inherit;
+        cursor: pointer;
     }
-
-    @media (max-width: 860px) {
-        .studio-tray {
-            right: 50%;
-            max-width: calc(100vw - 24px);
-        }
+    button.is-active {
+        background: $botanical;
+        border-color: $olive;
+        font-weight: 700;
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+    }
+    svg {
+        flex: none;
+        width: 1em;
+        height: 1em;
     }
 }

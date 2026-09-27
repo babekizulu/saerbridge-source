@@ -9,7 +9,7 @@ export default function EmailDesign({ delivery }: { delivery: EmailDelivery }) {
     const [note, setNote] = useState('');
     return <details className='email-design'>
         <summary>Email my design</summary>
-        {!delivery.available ? <p>Email delivery is not enabled yet. You can download your report and cost CSV from the tabs below.</p> :
+        {!delivery.available ? <p>Email delivery is not enabled yet. Choose Report or Costs above to download your files.</p> :
         <form onSubmit={async (event) => {
             event.preventDefault();
             if (state !== 'idle') return;
